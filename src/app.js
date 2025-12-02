@@ -33,6 +33,21 @@ app.get("/feed", async (req, res) => {
   }
 });
 
+app.get("/fone", async (req, res) => {
+  const userfind = req.body.emailId;
+  try {
+    console.log(userfind);
+    const userfone = await User.findOne({ emailId: userfind });
+    if (userfone === 0) {
+      res.status(404).send("The user could not  be found");
+    } else {
+      res.send(userfone);
+    }
+  } catch (err) {
+    res.status(404).send("Something went wrong");
+  }
+});
+
 connectDB()
   .then(() => {
     console.log("Your Connection is established sucessfully");
