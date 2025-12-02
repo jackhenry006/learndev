@@ -48,6 +48,17 @@ app.get("/fone", async (req, res) => {
   }
 });
 
+app.delete("/delet", async (req, res) => {
+  const userid = req.body.userid;
+
+  try {
+    const userde = await User.findByIdAndDelete(userid);
+    res.send("User is deleted sucessfully");
+  } catch (err) {
+    res.status(404).send("Something Went Wrong");
+  }
+});
+
 connectDB()
   .then(() => {
     console.log("Your Connection is established sucessfully");
