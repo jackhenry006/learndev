@@ -70,6 +70,17 @@ app.patch("/update", async (req, res) => {
   }
 });
 
+app.patch("/updatee", async (req, res) => {
+  const useremail = req.body.emailId;
+  const data = req.body;
+  try {
+    const usere = await User.findOneAndUpdate({ emailId: useremail }, data);
+    res.send("User data is updated sucessfully");
+  } catch (err) {
+    res.status(404).send("Something went wrong");
+  }
+});
+
 connectDB()
   .then(() => {
     console.log("Your Connection is established sucessfully");
